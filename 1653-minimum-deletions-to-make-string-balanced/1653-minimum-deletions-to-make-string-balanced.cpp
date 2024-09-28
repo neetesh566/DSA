@@ -2,14 +2,19 @@ class Solution {
 public:
     int minimumDeletions(string s) {
         int n=s.length();
-        int cnt =0;
-        stack<char> st;
+        int cnta =0;
+        for(int i=n-1;i>=0;i--){
+            if(s[i]=='a') cnta++;
+        }
+        
+        int cnt = INT_MAX;
+        int cntb=0;
         for(int i=0;i<n;i++){
-            if(!st.empty() && s[i]=='a' && st.top()=='b'){
-                cnt++;
-                st.pop();
-            }
-            else st.push(s[i]);
+            if(s[i]=='a') cnta--;
+            
+            cnt = min(cnt,(cnta+cntb));
+            
+            if(s[i]=='b') cntb++;
         }
         return cnt;
     }
